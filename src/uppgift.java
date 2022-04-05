@@ -68,14 +68,11 @@ public class uppgift {
         return true;
     }
 
-    public static int sum(){
+    public static double sum(){
         Scanner tgb = new Scanner(System.in);
         System.out.print("Addera alla heltal fram till och med... ");
-        int N = Integer.parseInt(tgb.nextLine());
-        int x = 0;
-        for(int i = 1; i <= N; i++){
-            x += i;
-        }
+        double N = Double.parseDouble(tgb.nextLine());
+        Double x = ((1+N)/2)*N;
         return x;
     }
 
@@ -84,14 +81,14 @@ public class uppgift {
         for(double i = 2; n > 0; i++){
             if(isPrime(i)){
                 s = s + (int) i + "\n";
-                n -= 1;
             }
+            n -= 1;
         }
         return s;
     }
 
     public static boolean isPrime(double a){
-        for(int i = 2; i < a; i++){
+        for(int i = 3; i < a; i++){
             if(a % i == 0){
                 return false;
             }
