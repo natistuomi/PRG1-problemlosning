@@ -5,10 +5,8 @@ public class uppgift {
     public static void main (String[] args){
         String s = "Test phrase";
         String r = reverse(s);
-        System.out.println(s + "\n" + r);
-
         String camel = camelCase(s);
-        System.out.println(camel);
+        System.out.print(s  + " blir baklänges till " + r + " och i camelcase till " + camel);
 
         String a = "apa";
         if(palindrom(a)){
@@ -18,14 +16,23 @@ public class uppgift {
             System.out.println("Inte en palindrom");
         }
 
-        System.out.println(sum());
+        System.out.println("Summan av alla tal framtills dess: " + sum());
 
-        System.out.println(primtal(100));
+        System.out.println("Primtal framtills 100 är: \n" + primeUntil(10));
+        // Fungerar minst framtills 100
 
-        System.out.println(addAllWithThree(100000));
+        System.out.println("Summan av alla tal med 3 framtills 100000: " + addAllWithThree(100000));
 
-        System.out.println(primtalsTvillingar(1000000));
+        System.out.println("Alla primtalstvillingar framills 10000: \n" + primeTwins(100));
+        // Fungerar framtills 10 000
+
+        System.out.println("Alla pythagoreiska tripplar framtills x: \n" + pythTriples(100));
+        // Fungerar iallafall framtills 100
     }
+
+
+
+
 
     public static String reverse(String s){
         String New = "";
@@ -72,23 +79,24 @@ public class uppgift {
         return x;
     }
 
-    public static String primtal(int n){
+    public static String primeUntil(int n){
         String s = "";
-        boolean a;
-        for(int i = 2; n > 0; i++){
-            a = true;
-            for(int c = 2; c < i; c++){
-                if(i % c == 0){
-                    c = i;
-                    a = false;
-                }
-            }
-            if(a){
-                s = s + i + " ";
+        for(double i = 2; n > 0; i++){
+            if(isPrime(i)){
+                s = s + (int) i + "\n";
                 n -= 1;
             }
         }
         return s;
+    }
+
+    public static boolean isPrime(double a){
+        for(int i = 2; i < a; i++){
+            if(a % i == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static double addAllWithThree(double a){
@@ -111,26 +119,41 @@ public class uppgift {
         return false;
     }
 
-    public static String primtalsTvillingar(int n){
+    public static String primeTwins(double n){
         String s = "";
-        boolean a;
-        int one = 3;
-        for(int i = 4; i <= n; i++){
-            a = true;
-            for(int c = 2; c < i; c++){
-                if(i % c == 0){
-                    c = i;
-                    a = false;
+        double last = 3;
+        for(double i = 5; i <= n; i++){
+            if(isPrime(i)){
+                if((i - last) == 2){
+                    s = s + (int) last + " & " + (int) i + "\n";
                 }
+                last = i;
             }
-            if(a){
-                if(i - one == 2){
-                    s = s + " " + one + " " + i + " ";
+            else{
+                last = 0;
+            }
+            i += 1;
+        }
+        return s;
+    }
+
+    public static String pythTriples(double x){
+        String s = "";
+        double c;
+        for(int a = 1; a <= x; a++){
+            for(int b = 1; b <= x; b++){
+                c = Math.sqrt(a*a + b*b);
+                if(isInteger(c)){
+                    s = s + a + " " + b + " " + (int) c + "\n";
                 }
-                one = i;
             }
         }
         return s;
+    }
+
+    public static boolean isInteger(double a){
+        int b = (int) a;
+        return b == a;
     }
 
 }
